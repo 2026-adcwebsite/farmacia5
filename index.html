@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmacia Vita – Shëndet & Mirëqenie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a6b4a;
+    --green-light: #2d9968;
+    --green-pale: #e8f4ef;
+    --cream: #faf8f3;
+    --dark: #0f2318;
+    --gold: #c9a84c;
+    --text: #2c3e30;
+    --white: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5%; background:rgba(250,248,243,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(26,107,74,0.12);
+    transition: box-shadow .3s;
+  }
+  .nav-logo { display:flex; align-items:center; gap:10px; }
+  .nav-logo .cross { font-size:22px; color:var(--green); }
+  .nav-logo span { font-family:'Cormorant Garamond', serif; font-size:22px; font-weight:600; color:var(--dark); letter-spacing:.5px; }
+  .nav-links { display:flex; gap:32px; }
+  .nav-links a { text-decoration:none; color:var(--text); font-size:14px; font-weight:500; letter-spacing:.3px; transition:color .2s; }
+  .nav-links a:hover { color:var(--green); }
+  .nav-cta {
+    background:var(--green); color:var(--white); border:none; padding:10px 22px;
+    border-radius:30px; font-size:13px; font-weight:500; cursor:pointer;
+    text-decoration:none; transition:background .2s, transform .15s;
+  }
+  .nav-cta:hover { background:var(--green-light); transform:translateY(-1px); }
+  .nav-mobile-btn { display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:120px 5% 80px;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(45,153,104,.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 15% 80%, rgba(201,168,76,.08) 0%, transparent 70%),
+      var(--cream);
+    position:relative; overflow:hidden;
+  }
+  .hero-bg-circle {
+    position:absolute; right:-120px; top:50%; transform:translateY(-50%);
+    width:520px; height:520px; border-radius:50%;
+    border:1px solid rgba(26,107,74,.12);
+    animation: rotateSlow 30s linear infinite;
+  }
+  .hero-bg-circle::before {
+    content:''; position:absolute; inset:40px; border-radius:50%;
+    border:1px solid rgba(201,168,76,.18);
+  }
+  @keyframes rotateSlow { to { transform: translateY(-50%) rotate(360deg); } }
+  .hero-content { max-width:620px; position:relative; z-index:2; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--green-pale); border:1px solid rgba(26,107,74,.2);
+    border-radius:30px; padding:6px 16px; margin-bottom:28px;
+    font-size:12px; color:var(--green); letter-spacing:.8px; text-transform:uppercase; font-weight:500;
+    animation: fadeUp .7s ease forwards;
+  }
+  .hero-badge::before { content:'✦'; font-size:10px; }
+  .hero h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(42px,6vw,72px); font-weight:300; line-height:1.1;
+    color:var(--dark); margin-bottom:20px;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero h1 em { font-style:italic; color:var(--green); }
+  .hero p {
+    font-size:16px; line-height:1.8; color:#5a6b5e; max-width:480px;
+    margin-bottom:40px;
+    animation: fadeUp .7s .2s ease both;
+  }
+  .hero-actions { display:flex; gap:14px; flex-wrap:wrap; animation: fadeUp .7s .3s ease both; }
+  .btn-primary {
+    background:var(--green); color:var(--white); padding:14px 30px;
+    border-radius:40px; text-decoration:none; font-size:14px; font-weight:500;
+    transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover { background:var(--green-light); transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,107,74,.25); }
+  .btn-wa {
+    background:var(--white); color:var(--green); padding:14px 30px;
+    border-radius:40px; text-decoration:none; font-size:14px; font-weight:500;
+    border:1.5px solid var(--green); transition:all .2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-wa:hover { background:var(--green-pale); transform:translateY(-2px); }
+  .hero-stats {
+    display:flex; gap:40px; margin-top:60px; flex-wrap:wrap;
+    animation: fadeUp .7s .4s ease both;
+  }
+  .stat { border-left:2px solid var(--green); padding-left:16px; }
+  .stat-num { font-family:'Cormorant Garamond', serif; font-size:32px; font-weight:600; color:var(--dark); line-height:1; }
+  .stat-label { font-size:12px; color:#7a8c7e; margin-top:4px; letter-spacing:.3px; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── SERVICES ── */
+  .services { padding:100px 5%; background:var(--white); }
+  .section-header { text-align:center; margin-bottom:60px; }
+  .section-tag { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--green); font-weight:500; margin-bottom:12px; display:block; }
+  .section-title { font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,48px); font-weight:400; color:var(--dark); }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:24px; }
+  .service-card {
+    padding:36px 28px; border-radius:16px; border:1px solid rgba(26,107,74,.1);
+    background:var(--cream); transition:all .25s; position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--green), var(--green-light));
+    transform:scaleX(0); transform-origin:left; transition:transform .3s;
+  }
+  .service-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(26,107,74,.1); border-color:transparent; }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-icon { font-size:32px; margin-bottom:20px; }
+  .service-card h3 { font-family:'Cormorant Garamond', serif; font-size:22px; font-weight:600; color:var(--dark); margin-bottom:10px; }
+  .service-card p { font-size:14px; line-height:1.7; color:#6a7a6e; }
+
+  /* ── PRODUCTS ── */
+  .products { padding:100px 5%; background:var(--green); position:relative; overflow:hidden; }
+  .products::before {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:300px; height:300px; border-radius:50%;
+    background:rgba(255,255,255,.05);
+  }
+  .products .section-tag { color:var(--gold); }
+  .products .section-title { color:var(--white); margin-bottom:50px; }
+  .products-row { display:flex; gap:20px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none; }
+  .products-row::-webkit-scrollbar { display:none; }
+  .prod-card {
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(10px); border-radius:16px; padding:28px 24px;
+    min-width:200px; flex-shrink:0; cursor:pointer; transition:all .2s;
+  }
+  .prod-card:hover { background:rgba(255,255,255,.18); transform:translateY(-4px); }
+  .prod-icon { font-size:28px; margin-bottom:14px; }
+  .prod-card h4 { color:var(--white); font-size:15px; font-weight:500; margin-bottom:6px; }
+  .prod-card p { color:rgba(255,255,255,.65); font-size:12px; line-height:1.6; }
+
+  /* ── CONTACT / CTA ── */
+  .contact { padding:100px 5%; background:var(--cream); }
+  .contact-inner {
+    max-width:900px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  .contact-info h2 { font-family:'Cormorant Garamond', serif; font-size:40px; font-weight:400; color:var(--dark); margin-bottom:16px; line-height:1.2; }
+  .contact-info p { color:#6a7a6e; font-size:15px; line-height:1.8; margin-bottom:32px; }
+  .contact-items { display:flex; flex-direction:column; gap:16px; }
+  .contact-item { display:flex; align-items:center; gap:14px; }
+  .contact-item .ci-icon { width:42px; height:42px; border-radius:12px; background:var(--green-pale); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .contact-item .ci-text { font-size:14px; color:var(--text); }
+  .contact-item .ci-text strong { display:block; font-size:13px; color:#8a9a8e; font-weight:400; margin-bottom:2px; }
+  .contact-actions { display:flex; flex-direction:column; gap:14px; }
+  .btn-wa-big {
+    display:flex; align-items:center; gap:14px;
+    background:#25D366; color:var(--white); padding:18px 24px;
+    border-radius:14px; text-decoration:none; font-size:15px; font-weight:500;
+    transition:all .2s; box-shadow:0 6px 20px rgba(37,211,102,.25);
+  }
+  .btn-wa-big:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(37,211,102,.35); }
+  .btn-wa-big .wa-icon { font-size:24px; }
+  .btn-call {
+    display:flex; align-items:center; gap:14px;
+    background:var(--white); color:var(--green); padding:18px 24px;
+    border-radius:14px; text-decoration:none; font-size:15px; font-weight:500;
+    border:1.5px solid var(--green); transition:all .2s;
+  }
+  .btn-call:hover { background:var(--green-pale); transform:translateY(-3px); }
+  .btn-call .call-icon { font-size:20px; }
+  .hours-box {
+    background:var(--dark); color:var(--white); border-radius:14px; padding:20px 24px; margin-top:6px;
+  }
+  .hours-box h4 { font-family:'Cormorant Garamond', serif; font-size:18px; font-weight:400; margin-bottom:12px; color:var(--gold); }
+  .hours-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.08); }
+  .hours-row:last-child { border:none; }
+  .hours-row span:last-child { color:rgba(255,255,255,.6); }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--dark); color:rgba(255,255,255,.5); text-align:center;
+    padding:28px 5%; font-size:13px;
+  }
+  footer strong { color:var(--white); }
+
+  /* ── FLOATING WA ── */
+  .wa-float {
+    position:fixed; bottom:28px; right:28px; z-index:200;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    font-size:26px; text-decoration:none; box-shadow:0 6px 24px rgba(37,211,102,.4);
+    transition:all .2s; animation: pulse 2.5s infinite;
+  }
+  .wa-float:hover { transform:scale(1.12); }
+  @keyframes pulse {
+    0%,100% { box-shadow:0 6px 24px rgba(37,211,102,.4); }
+    50% { box-shadow:0 6px 40px rgba(37,211,102,.65); }
+  }
+
+  /* ── MOBILE ── */
+  @media(max-width:768px){
+    .nav-links, .nav-cta { display:none; }
+    .nav-mobile-btn { display:block; }
+    .hero { padding:100px 5% 60px; }
+    .hero-bg-circle { width:300px; height:300px; right:-80px; }
+    .hero-stats { gap:24px; }
+    .contact-inner { grid-template-columns:1fr; gap:40px; }
+    .services-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="cross">✚</span>
+    <span>Farmacia Vita</span>
+  </div>
+  <div class="nav-links">
+    <a href="#sherbimet">Shërbimet</a>
+    <a href="#produktet">Produktet</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+  <a href="https://wa.me/355XXXXXXXX" class="nav-cta" target="_blank">Na Kontaktoni</a>
+  <button class="nav-mobile-btn">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Farmaci e Licensuar · Tiranë</div>
+    <h1>Shëndeti juaj,<br><em>kujdesi ynë</em></h1>
+    <p>Farmacia Vita ofron ilaçe të cilësisë së lartë, këshilla profesionale farmaceutike dhe produkte shëndetësore për të gjithë familjen tuaj.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">📋 Kërko Recetë &rarr;</a>
+      <a href="https://wa.me/355XXXXXXXX" class="btn-wa" target="_blank">💬 WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Vjet Eksperiencë</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5000+</div>
+        <div class="stat-label">Produkte në Stok</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Disponibël</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="sherbimet">
+  <div class="section-header">
+    <span class="section-tag">Çfarë Ofrojmë</span>
+    <h2 class="section-title">Shërbime Farmaceutike</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💊</div>
+      <h3>Ilaçe me Recetë</h3>
+      <p>Plotësojmë recetat mjekësore me kujdes dhe saktësi. Farmacistët tanë kontrollojnë çdo recetë me vëmendje maksimale.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🩺</div>
+      <h3>Këshilla Farmaceutike</h3>
+      <p>Ekipi ynë i farmacistëve të licensuar ofron këshilla profesionale falas për çdo pyetje shëndetësore.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Produkte Natyrale</h3>
+      <p>Gamë e gjerë suplementesh ushqimore, vitaminash dhe produktesh të mjekësisë alternative.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧴</div>
+      <h3>Kozmetikë & Kujdes</h3>
+      <p>Produkte dermokozmetike, kujdes i lëkurës dhe produkteve për higjienën personale të markat më të njohura.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <h3>Produkte për Fëmijë</h3>
+      <p>Seksion i dedikuar me ilaçe pediatrike, vitamina dhe produkte të sigurta për fëmijët tuaj.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚚</div>
+      <h3>Porosi Online</h3>
+      <p>Porosisni nëpërmjet WhatsApp dhe ne sjellim ilaçet deri në derën tuaj brenda Tiranës.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="produktet">
+  <div class="section-header">
+    <span class="section-tag">Kategorite</span>
+    <h2 class="section-title">Produkte të Zgjedhura</h2>
+  </div>
+  <div class="products-row">
+    <div class="prod-card"><div class="prod-icon">❤️</div><h4>Kardiovaskular</h4><p>Ilaçe zemre dhe presioni</p></div>
+    <div class="prod-card"><div class="prod-icon">🧠</div><h4>Neurologji</h4><p>Produkte neuropsikiatrike</p></div>
+    <div class="prod-card"><div class="prod-icon">🦷</div><h4>Stomatologji</h4><p>Kujdes dentar</p></div>
+    <div class="prod-card"><div class="prod-icon">💪</div><h4>Suplemente</h4><p>Vitamina & minerale</p></div>
+    <div class="prod-card"><div class="prod-icon">🌡️</div><h4>Antifebrilë</h4><p>Kundër dhimbjeve & febrës</p></div>
+    <div class="prod-card"><div class="prod-icon">👁️</div><h4>Okulistikë</h4><p>Produkte për sytë</p></div>
+    <div class="prod-card"><div class="prod-icon">🩹</div><h4>Mjekësi Sportive</h4><p>Kujdes pas lëndimit</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2>Na gjeni lehtësisht</h2>
+      <p>Jemi këtu për t'ju ndihmuar çdo ditë. Mund të na kontaktoni nëpërmjet WhatsApp, telefonit ose të na vizitoni drejtpërdrejt.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div class="ci-text"><strong>Adresa</strong>Rruga e Kavajës, Nr. 45 · Tiranë</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div class="ci-text"><strong>Telefon</strong>+355 69 XXX XXXX</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">✉️</div>
+          <div class="ci-text"><strong>Email</strong>info@farmaciavita.al</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <a href="https://wa.me/355XXXXXXXX" class="btn-wa-big" target="_blank">
+        <span class="wa-icon">💬</span>
+        <div>
+          <div style="font-size:11px;opacity:.8;margin-bottom:2px">Na shkruani tani</div>
+          WhatsApp
+        </div>
+      </a>
+      <a href="tel:+355XXXXXXXXX" class="btn-call">
+        <span class="call-icon">📞</span>
+        <div>
+          <div style="font-size:11px;opacity:.7;margin-bottom:2px">Thirrni drejtpërdrejt</div>
+          +355 69 XXX XXXX
+        </div>
+      </a>
+      <div class="hours-box">
+        <h4>⏰ Orari i Punës</h4>
+        <div class="hours-row"><span>E Hënë – E Premte</span><span>08:00 – 21:00</span></div>
+        <div class="hours-row"><span>E Shtunë</span><span>09:00 – 19:00</span></div>
+        <div class="hours-row"><span>E Diel</span><span>10:00 – 16:00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Farmacia Vita</strong> · Të gjitha të drejtat e rezervuara · Tiranë, Shqipëri</p>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/355XXXXXXXX" class="wa-float" target="_blank" title="Na shkruani në WhatsApp">💬</a>
+
+</body>
+</html>
